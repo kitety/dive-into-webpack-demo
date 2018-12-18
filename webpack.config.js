@@ -4,6 +4,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     mode: 'development',
     // 入口
+    // 修改入口的对应的依赖才会热更新
     entry: './main.js',
     // 出口
     output: {
