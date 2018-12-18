@@ -4,7 +4,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     mode: 'development',
     // 入口
-    // 修改入口的对应的依赖才会热更新
+    // 修改入口的对应的依赖才会热更新，而对应index.html不会触发，因为index.html脱离了js的模块存在
     entry: './main.js',
     // 出口
     output: {
@@ -16,7 +16,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
-                    fallback:'style-loader',
+                    fallback: 'style-loader',
                     // 转换.css 文件需要的loader
                     use: 'css-loader'
                 })
@@ -40,7 +40,7 @@ module.exports = {
             // 从.js文件中提取出来的.css的文件的名称
             // css 需要另外引入
             // filename:'[name]_[hash:4].css'
-            filename:'[name].css'
+            filename: '[name].css'
         })
     ]
 }
