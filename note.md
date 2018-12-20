@@ -44,3 +44,14 @@ filename 输出文件名,string类型.单个输出可以直接指定文件名,�
 - 注意:hash和chunkhash的长度是可以指定的,比如[hash:8]就指定8位,默认是20位.同时,ExtractWebpackPlugin使用的是contenthash,不是chunkhash
 
 chunkFilename:配置无入口的chunk在输出时的文件名称.用于指定在运行过程中chunk在输出时候的名称.
+
+path:输出存放的本地的目录,必须是string类型的绝对路径,用path.resolve()
+
+publicPath:构建出的资源需要异步加载,就需要资源的URL.publicPath配置发布到线上的URL前缀,为string类型,默认是空的字符串,即使用相对路径.
+
+crossOriginLoading:输出部分的代码块需要异步加载,使用JSONP方式,类似于script的src,这个配置就是去配置crossOrigin.其中crossorigin有两种值可取(跟图片,视频,canvas类似):
+- anonymous默认,不会带上用户的cookie
+- use-credentials 带上用户的cookie
+
+设置crossorigin获取异步加载脚本的详细错误信息
+
