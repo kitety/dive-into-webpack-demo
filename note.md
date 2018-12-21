@@ -1,4 +1,4 @@
-#第一章
+# 第一章
 
 热更新注意事项
 ```
@@ -11,11 +11,11 @@
 ```
 --devtool source-map //在devServer后面加上，chrome Source可以看到可调式的源代码
 ```
-#第二章
+# 第二章
 
 webpack --config 指定执行配置的js
 
-entry入口
+Entry入口
 ===
 context为执行的根目录,默认为当前工作目录,可以用path.resolve()修改
 
@@ -29,7 +29,7 @@ chunk:入口为string或者array,就生成一个main chunk,如果是object就生
 
 动态entry:可以配置同步函数或者异步函数来配置
 
-output
+Output
 ===
 filename 输出文件名,string类型.单个输出可以直接指定文件名,如果是多个文件的话就可以使用'[name].js',这样就是以chunk的名字输出.具体可以使用:
 
@@ -71,7 +71,7 @@ libraryExport
 
 配置导出模块中哪些子模块需要导出,要在libraryTarget设置为commonjs或者commonjs2才有意义
 
-module
+Module
 ===
 loader:重点
 
@@ -96,3 +96,5 @@ descriptionFile 配置第三方模块的文件名称,如package.json文件,形�
 enforceExtension 必须带上对应的后缀,形式为字符串数组
 
 enforceModuleExtension 功能与enforceExtension类似,但是只在node_modules下的模块生效1
+
+
