@@ -55,3 +55,44 @@ crossOriginLoading:输出部分的代码块需要异步加载,使用JSONP方式,
 
 设置crossorigin获取异步加载脚本的详细错误信息
 
+libraryTarget和library
+
+构建一个可以被其他模块导入的库,二者经常一起使用
+- output.libraryTarget 配置用何种方式到出库,是字符串枚举类型
+  - var(默认),通过var赋值给library指定变量名称,就是返回代码内容
+  - commonjs,配置通过CommonJS规范导出
+  - commonjs2,配置通过CommonJS2规范导出
+  - this,通过this被赋值给通过library指定的名称
+  - window,通过window被赋值给通过library指定的名称,挂在window上
+  - global,通过global被赋值给通过library指定的名称,挂在global上
+- output.library 配置导出库的名称
+
+libraryExport
+
+配置导出模块中哪些子模块需要导出,要在libraryTarget设置为commonjs或者commonjs2才有意义
+
+module
+===
+loader:重点
+
+noParse 让webpack忽略部分没有采用模块化的文件的递归解析和处理,提高构建性能.比如:jw,chartJS.同时注意被忽略的文件不应该包含import,require,define等模块化语句,否则在浏览器环境无法运行
+
+parser对模块化的精确到语法层面的JS解析,支持AMD,CommonJS,ES6
+
+Resolve
+===
+webpack 启动会在入口模块出发寻找以来的模块,resolve配置如何寻找
+
+alias 配置别名,把原路径配置为一个新的路径
+
+mainFields 针对代码不同的版本(有的第三方模块有多种版本),就用mainFields去指定版本,顺序会按照package.json去寻找
+
+extensions 导入语句没有带文件后缀的时候,尝试自动带上后缀访问(字符串的数组)
+
+modules 指定第三方模块的目录(字符串的数组),之后就可以直接引用使用
+
+descriptionFile 配置第三方模块的文件名称,如package.json文件,形式为字符串数组
+
+enforceExtension 必须带上对应的后缀,形式为字符串数组
+
+enforceModuleExtension 功能与enforceExtension类似,但是只在node_modules下的模块生效1
