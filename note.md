@@ -97,4 +97,38 @@ enforceExtension 必须带上对应的后缀,形式为字符串数组
 
 enforceModuleExtension 功能与enforceExtension类似,但是只在node_modules下的模块生效1
 
+Plugins
+===
+用于拓展Webpack的功能,接受一个数组,每一项都是使用的Plugin的实例,需要的参数从构造函数传入
+
+devServer
+===
+高效率开发,可以通过文件配置和命令行参数配置
+
+hot 是否启用热模块替换功能,在不刷新整个页面的情况下新模块替换旧的模块实现实时预览
+
+inline 依赖一个注入到页面的代理客户端去接受来自DevServer的命令和刷新网页,而inline就是配置是否自动注入
+- 开启：DevServer会在构建变化的代码通过代理客户端控制网页刷新
+- 关闭：Devserver不能控制要开发的网页，通过iframe方式去运行开发的网页，再刷新iframe
+
+historyApiFallback 用于方便开发使用了HTML5 History API的SPA应用，比如访问/user页面和/home页面都要返回index.html页面。如果是只有一个index.html的应用可以直接设置为true，否则可以按照正则匹配
+
+contentBase 配置DevServer HTTP服务器文件根目录，默认当前目录。也可以通过path配置
+
+header 在http响应中注入http响应头，内容为object
+
+host 配置DevServer服务监听的地址，命令行配置--host 0.0.0.0
+
+port 配置DevServer服务监听的端口，默认8080
+
+allowdHosts 配置一个白名单列表，只有http请求的HOST在列表里才正常返回,为字符串的数组, 比如：
+```
+allowdHosts:[
+  // 单个域名
+  'host.com',
+  // *.host2.com
+  '.host2.com'
+]
+```
+
 
