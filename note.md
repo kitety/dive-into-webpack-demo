@@ -131,4 +131,6 @@ allowdHosts:[
 ]
 ```
 
+disableHostCheck 用于配置是否关闭用于DNS重绑定http请求的host检查
+
 
