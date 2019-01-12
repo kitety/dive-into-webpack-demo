@@ -133,4 +133,87 @@ allowdHosts:[
 
 disableHostCheck 用于配置是否关闭用于DNS重绑定HTTP请求的HOST检查。DevServer默认只接受本地的请求，关闭之后可以接受来自任何HOST的请求。通常用于搭配 --host 0.0.0.0使用。想要其他设备通过IP访问就要关闭HOST检查
 
+https 默认为http，但是可以设置。因为http2和service Worker必须在https之上。
 
+一下配置默认生成证书：
+```js
+devServer{
+  https:true
+}
+```
+使用自己的证书：
+```js
+devServer{
+  https:{
+    key:fs.readFileSync('path'),
+    cert:fs.readFileSync('path'),
+    ca:fs.readFileSync('path'),
+  }
+}
+```
+clientLogLevel 配置在客户端日志的等级，直接影响到你在浏览器控制台看到的日志内容
+
+compress 配置是否启用压缩，为布尔值，默认false
+
+open 第一次构建完成时默认浏览器打开的网页。并且提供openPage配置项用于打开指定的网址
+
+其他配置项
+===
+target
+针对应用场景的不同，target可以让webpack构建出针对不同环境运行的不同的代码
+```JS
+web 浏览器（默认）
+node nodejs，使用require加载chunk代码
+async-node nodejs，异步加载chunk代码
+webworker webworker
+electron-main electron主线程
+electron-renderer electron渲染线程
+```
+DevTool 配置Webpack如何生成Source Map，默认为false不生成，需要配置如下：
+```JS
+devtool:'source-map'
+```
+
+watch和watchOptions webpack的监听模式，支持监听文件更新，文件发生变化的时候重新编译，默认是关闭的，使用值为布尔值。在使用DevServer的时候，默认是开启的。此外，还提供了watchOptions灵活配置：
+```JS
+module.export={
+  // 开启监听
+  watch:true,
+  watchOptions:{
+    // 忽略的文件或者文件夹
+    ignored：/node_modules/,
+    // 监听等到变化后延迟的时间
+    // 默认300ms
+    aggregateTimeout:300,
+    // 判断文件是否发生变化是通过不停的去询问系统指定文件有没有发生变化
+    // 默认每秒1000次
+    poll:1000
+  }
+}
+```
+
+externals 设置构建代码过程中哪些代码不需要打包，可以忽略。如：页面引入了jquery，打包的生成有引入一次，这样就可以省略。
+通过externals告诉运行环境已经内置了哪些全局变量
+```js
+module.export={
+  externals:{
+    // 把导入语句的jquery替换为全局变量的jQuery
+    jquery:'jQuery'
+  }
+}
+```
+
+resolveLoader 告诉webpack如何去寻找loader，因为在使用loader时是通过包名寻找。webpack需要配置loader包名去找到loader的实际代码，用loader去处理源文件
+```js
+// 此配置项常用语加载本地的loader
+module.export={
+  resolveLoader:{
+    // 目录下寻找
+    modules:["node_modules"],
+    // 入口文件的后缀
+    extensions:['.js','.json'],
+    // 指明入口文件位置的字段
+    mainFields:['loader','main']
+  }
+}
+```
