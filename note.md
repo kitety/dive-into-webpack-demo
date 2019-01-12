@@ -131,6 +131,6 @@ allowdHosts:[
 ]
 ```
 
-disableHostCheck 用于配置是否关闭用于DNS重绑定http请求的host检查
+disableHostCheck 用于配置是否关闭用于DNS重绑定HTTP请求的HOST检查。DevServer默认只接受本地的请求，关闭之后可以接受来自任何HOST的请求。通常用于搭配 --host 0.0.0.0使用。想要其他设备通过IP访问就要关闭HOST检查
 
 
